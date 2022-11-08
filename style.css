@@ -1,0 +1,16 @@
+body{
+    background: #585858;
+    color: #fff;
+}
+.calculadora{
+    margin-top: 3%;
+    margin-left: 3%;
+}
+h2{
+    font-family: 'Poppins', sans-serif;
+    font-size: 45px;
+}
+a{
+    font-family: 'Poppins', sans-serif;
+    font-size: 30px;
+}
