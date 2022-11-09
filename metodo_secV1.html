@@ -80,6 +80,9 @@
             a = xi
             b = xi_prox
             if i == max_it:
+                resp = str(resp)
+                console.log(f'text: {resp}')
+                Element('test-output1').element.innerText = resp
                 quit()
             if erro <= erro_aceito:
                 loopCondition = False
