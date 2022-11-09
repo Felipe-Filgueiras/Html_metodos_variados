@@ -83,6 +83,9 @@
                 resp = str(resp)
                 console.log(f'text: {resp}')
                 Element('test-output1').element.innerText = resp
+                res = ""     
+                console.log(f'text: {res}')
+                Element('test-output2').element.innerText = res
                 quit()
             if erro <= erro_aceito:
                 loopCondition = False
