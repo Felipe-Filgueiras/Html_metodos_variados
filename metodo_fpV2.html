@@ -87,7 +87,7 @@
                     quit()
             
             elif f(xi) * f(b) < 0:
-                erro = abs(xi - a)
+                erro = abs((xi - a)/xi)
                 if i == 0:
                     resp += f"i={i+1}, a = {a}, b = {b}, xi = {xi}, f(a) = {f(a)}, f(b) = {f(b)}, f(xi) = {f(xi)}"
                     resp += "\n"
