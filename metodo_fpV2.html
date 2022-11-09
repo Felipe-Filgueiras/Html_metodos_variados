@@ -84,6 +84,12 @@
                 b = xi
                 i = i + 1
                 if i == max_it:
+                    res = ""        
+                    console.log(f'text: {res}')
+                    Element('test-output2').element.innerText = res
+                    resp = str(resp)
+                    console.log(f'text: {resp}')
+                    Element('test-output1').element.innerText = resp
                     quit()
             
             elif f(xi) * f(b) < 0:
@@ -97,6 +103,12 @@
                 a = xi
                 i = i + 1
                 if i == max_it:
+                    res = ""        
+                    console.log(f'text: {res}')
+                    Element('test-output2').element.innerText = res
+                    resp = str(resp)
+                    console.log(f'text: {resp}')
+                    Element('test-output1').element.innerText = resp
                     quit()
             
             else:
