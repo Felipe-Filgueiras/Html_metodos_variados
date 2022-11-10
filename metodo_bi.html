@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Falsa posição</title>
+  <link rel="stylesheet" href="style.css">
+  <!--<link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />-->
+  <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+</head>
+
+<body>
+    <h2>Calculadora do método de falsa posição</h2>
+    <a href="./index.html">Voltar para o menu</a>
+    <div class="calculadora">
+        <div>
+        <p>Insira a função: Exemplos ((x ** 3)- 9*x +3), a = 0 b = 1, erro = 0.0001</p>
+        <p>(((e**x)/2)-(2*cos(x))), a = 0 b = 1, erro = 0.0001, n = 20</p>
+        <p>((2*x**6)-(7*x**5)+(x**4)-(5*x**3)+(x**2)+(2*x)-1), a = 3 b = 4, erro = 0.0001, n = 20</p>
+        <input type="text" id="test-input1"/>
+        <p>Insira o limite inferior: </p>
+        <input type="text" id="test-input2"/>
+        <p>Insira o limite superior: </p>
+        <input type="text" id="test-input3"/>
+        <p>Insira o erro máximo: </p>
+        <input type="text" id="test-input4"/>
+        <p>Insira o número máximo de iterações: </p>
+        <input type="text" id="test-input5"/>
+        <button id="submit-button" type="submit" pys-onClick="my_function">OK</button>
+        <p></p>
+        </div>
+        <div id="test-output1"></div>
+        <div id="test-output2"></div>
+        <div id="test-output3"></div>
+        <div id="test-output4"></div>
+        <div id="test-output5"></div>
+    </div>
+  
+  <py-script>
+  from js import console
+  from math import *
+  
+  def my_function(*args, **kwargs):
+
+    text1 = Element('test-input1').element.value
+    text2 = Element('test-input2').element.value
+    text3 = Element('test-input3').element.value
+    text4 = Element('test-input4').element.value
+    text5 = Element('test-input5').element.value
+
+    inp1 = str(text1)
+    inp2 = float(text2)
+    inp3 = float(text3)
+    inp4 = float(text4)
+    inp5 = float(text5)
+
+    def metodo_fp(func, a, b, erro_aceito, max_it):
+        
+        def f(x):
+            f = eval(func)
+            return f
+
+        i = 0
+        erro = ()
+        loopCondition = True
+        resp = ""
+
+        while loopCondition == True:
+            
+            xi = (a + b) / 2
+
+            if f(a) * f(b) >= 0:
+                quit()
+
+            elif f(xi) * f(a) < 0:
+                erro = abs((xi - b)/xi)
+                if i == 0:
+                    resp += f"i={i+1}, a = {a}, b = {b}, xi = {xi}, f(a) = {f(a)}, f(b) = {f(b)}, f(xi) = {f(xi)}"
+                    resp += "\n"
+                else:
+                    resp += f"i={i+1}, a = {a}, b = {b}, xi = {xi}, f(a) = {f(a)}, f(b) = {f(b)}, f(xi) = {f(xi)}, erro = {erro}"
+                    resp += "\n"
+                b = xi
+                i = i + 1
+                if i == max_it:
+                    res = ""        
+                    console.log(f'text: {res}')
+                    Element('test-output2').element.innerText = res
+                    resp = str(resp)
+                    console.log(f'text: {resp}')
+                    Element('test-output1').element.innerText = resp
+                    quit()
+            
+            elif f(xi) * f(b) < 0:
+                erro = abs((xi - a)/xi)
+                if i == 0:
+                    resp += f"i={i+1}, a = {a}, b = {b}, xi = {xi}, f(a) = {f(a)}, f(b) = {f(b)}, f(xi) = {f(xi)}"
+                    resp += "\n"
+                else:
+                    resp += f"i={i+1}, a = {a}, b = {b}, xi = {xi}, f(a) = {f(a)}, f(b) = {f(b)}, f(xi) = {f(xi)}, erro = {erro}"
+                    resp += "\n"
+                a = xi
+                i = i + 1
+                if i == max_it:
+                    res = ""        
+                    console.log(f'text: {res}')
+                    Element('test-output2').element.innerText = res
+                    resp = str(resp)
+                    console.log(f'text: {resp}')
+                    Element('test-output1').element.innerText = resp
+                    quit()
+            
+            else:
+                quit()
+            
+            if erro <= erro_aceito:
+                loopCondition = False
+
+        res = "A raiz aproximada é: " + str(xi)        
+        console.log(f'text: {res}')
+        Element('test-output2').element.innerText = res
+        resp = str(resp)
+        console.log(f'text: {resp}')
+        Element('test-output1').element.innerText = resp
+
+
+    metodo_fp(inp1, inp2, inp3, inp4, inp5)
+
+      
+      
+  </py-script>
+  
+</body>
+</html>
