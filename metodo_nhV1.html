@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secante</title>
+  <link rel="stylesheet" href="style.css">
+  <!--<link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />-->
+  <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+</head>
+
+<body>
+    <h2>Calculadora para método de newton haphson</h2>
+    <a href="./main.html">Voltar para o menu</a>
+    <div class="calculadora">
+        <div>
+        <p>Insira a função: Exemplo((x ** 3)- 9*x +3)</p>
+        <input type="text" id="test-input1"/>
+        <p>Insira o x0: </p>
+        <input type="text" id="test-input2"/>
+        <p>Insira o erro máximo aceito: </p>
+        <input type="text" id="test-input3"/>
+        <p>Insira o número máximo de iterações: </p>
+        <input type="text" id="test-input4"/>
+        <button id="submit-button" type="submit" pys-onClick="my_function">OK</button>
+        <p></p>
+        </div>
+        <div id="test-output1"></div>
+        <div id="test-output2"></div>
+        <div id="test-output3"></div>
+        <div id="test-output4"></div>
+        <div id="test-output5"></div>
+    </div>
+
+    <py-env>
+      - sympy
+    </py-env>
+  
+  <py-script>
+  from js import console
+  from math import *
+  from sympy import *
+  
+  def my_function(*args, **kwargs):
+
+    text1 = Element('test-input1').element.value
+    text2 = Element('test-input2').element.value
+    text3 = Element('test-input3').element.value
+    text4 = Element('test-input4').element.value
+
+    inp1 = str(text1)
+    inp2 = float(text2)
+    inp3 = float(text3)
+    inp4 = float(text4)
+
+    def metodo_nh(func, a, erro_aceito, max_it):
+
+        def f(x):
+            f = eval(func)
+            return f
+        
+        def derivada(n):
+            x = Symbol("x")
+            f = eval(func)
+            f_derivado = f.diff(x)
+            f_derivado = lambdify(x, f_derivado)
+            dx = f_derivado(n)
+            return dx
+        
+        i= 0
+        erro = ()
+        loopCondition = True
+        resp = ""
+
+        while loopCondition == True:
+
+            xi = a
+            fxi = f(xi)
+            dxi = derivada(xi)
+            xi_prox = xi-(fxi/dxi)
+            erro = abs(((xi_prox-xi)/xi_prox)*100)
+            if i == 0:
+                resp +=f"i={i}, xi = {a}, xi+1 = {xi_prox}"
+                resp += "\n"
+            else:
+                resp +=f"i={i}, xi = {a}, xi+1 = {xi_prox}, erro = {erro}"
+                resp += "\n"
+            i = i + 1
+            a = xi_prox
+            if i == max_it:
+                print("Erro max it")
+                quit()
+            if erro <= erro_aceito:
+                loopCondition = False
+
+        res = "A raiz aproximada é: " + str(xi_prox)        
+        console.log(f'text: {res}')
+        Element('test-output2').element.innerText = res
+        resp = str(resp)
+        console.log(f'text: {resp}')
+        Element('test-output1').element.innerText = resp
+
+
+    metodo_nh(inp1, inp2, inp3, inp4)
+
+      
+      
+  </py-script>
+  
+</body>
+</html>
